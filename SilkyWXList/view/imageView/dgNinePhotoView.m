@@ -12,17 +12,15 @@
 @implementation dgNinePhotoView
 
 - (instancetype)initWithFrame:(CGRect)frame {
-
-        UICollectionViewFlowLayout *fl = [[UICollectionViewFlowLayout alloc]init];
-        fl.minimumInteritemSpacing = 5;
-        fl.minimumLineSpacing = 5;
-        self.backgroundColor = [UIColor whiteColor];
-        self.delegate = self;
-        self.dataSource = self;
-        [self registerNib:[UINib nibWithNibName:@"dgNinePhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"dgNinePhotoCollectionViewCell"];
-    
-        return [super initWithFrame:frame collectionViewLayout:fl];
-    
+    UICollectionViewFlowLayout *fl = [[UICollectionViewFlowLayout alloc]init];
+    fl.minimumInteritemSpacing = 5;
+    fl.minimumLineSpacing = 5;
+    self = [super initWithFrame:frame collectionViewLayout:fl];
+    self.backgroundColor = [UIColor whiteColor];
+    self.delegate = self;
+    self.dataSource = self;
+    [self registerNib:[UINib nibWithNibName:@"dgNinePhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"dgNinePhotoCollectionViewCell"];
+    return self;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
