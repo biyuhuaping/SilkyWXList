@@ -52,14 +52,13 @@
     [self addFPSLabel];
 }
 
--(void)viewDidLayoutSubviews{
+- (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     self.collectionView.frame = self.view.frame;
 }
 
-#pragma mark 数据
+#pragma mark - 数据
 - (void)prepareListData {
-    
     //初始化数据
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"list" withExtension:@"json"];
     NSData *data = [NSData dataWithContentsOfURL:url];
@@ -72,36 +71,25 @@
     
 }
 
-/**
- 添加头尾刷新控件
- 
- */
+/// 添加头尾刷新控件
 - (void)addHeadRefresh {
-    
     self.collectionView.mj_header = [dgHeaderRefreshView headerWithRefreshingBlock:^{
         [self.collectionView.mj_header endRefreshing];
     }];
-    
-}
-- (void)addLoadMoreRefresh {
-    
-    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        dispatch_after(
-                       dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(),
-                       ^{
-                           [self loadMoreData];
-                           [self.collectionView.mj_footer endRefreshing];
-                       });
-    }];
-    
 }
 
+- (void)addLoadMoreRefresh {
+    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self loadMoreData];
+            [self.collectionView.mj_footer endRefreshing];
+        });
+    }];
+}
 
 /// 加载更多数据
 - (void)loadMoreData {
-    
     NSMutableArray *tempA = [NSMutableArray array];
-
     // 一次来十条
     for (int i=0; i < 10; i++) {
         
@@ -129,32 +117,26 @@
     [self.objects addObjectsFromArray:tempA];
    //更新数据
     [self.adapter performUpdatesAnimated:YES completion:nil];
-
 }
 
 
-#pragma mark UI
-- (dgNavView*)navView {
-    
+#pragma mark - UI
+- (dgNavView *)navView {
     if (!_navView) {
         _navView = [[dgNavView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, NAV_HEIGHT)];
         _navView.delegate = self;
     }
     return _navView;
-    
 }
 
 - (void)addFPSLabel {
-    
     YYFPSLabel *fpsLabel = [YYFPSLabel new];
     fpsLabel.frame = CGRectMake(SCREEN_WIDTH-100, SCREEN_HEIGHT-110, 60, 30);
     [self.view addSubview:fpsLabel];
-    
 }
 
-#pragma mark IG
-
--(UICollectionView *)collectionView{
+#pragma mark - IG
+- (UICollectionView *)collectionView{
     if (!_collectionView) {
         _collectionView = [[IGListCollectionView alloc] initWithFrame:CGRectZero];
         _collectionView.backgroundColor = [UIColor whiteColor];
@@ -168,33 +150,32 @@
     }
     return _collectionView;
 }
+
 - (IGListAdapter *)adapter {
     if (!_adapter) {
         _adapter = [[IGListAdapter alloc] initWithUpdater:[[IGListAdapterUpdater alloc] init] viewController:self];
     }
     return _adapter;
-    
 }
 
--(NSMutableArray<dgListModel*>*)objects{
+- (NSMutableArray<dgListModel*>*)objects{
     if (!_objects) {
         _objects = [NSMutableArray array];
     }
     return _objects;
 }
 
--(UIView *)emptyViewForListAdapter:(IGListAdapter *)listAdapter{
-        
-        UIView *emptyV = [UIView new];
-        emptyV.backgroundColor = [UIColor blueColor];
-        return nil;
+- (UIView *)emptyViewForListAdapter:(IGListAdapter *)listAdapter{
+    UIView *emptyV = [UIView new];
+    emptyV.backgroundColor = [UIColor blueColor];
+    return nil;
 }
     
--(NSArray<id<IGListDiffable>> *)objectsForListAdapter:(IGListAdapter *)listAdapter{
+- (NSArray<id<IGListDiffable>> *)objectsForListAdapter:(IGListAdapter *)listAdapter{
         return self.objects;
 }
     
--(IGListSectionController *)listAdapter:(IGListAdapter *)listAdapter sectionControllerForObject:(id)object{
+- (IGListSectionController *)listAdapter:(IGListAdapter *)listAdapter sectionControllerForObject:(id)object{
         IGListStackedSectionController *stack = [[IGListStackedSectionController alloc] initWithSectionControllers:@[[dgListHeadImageC new],[dgListContentC new],[dgListLocationC new],[dgListBottomC new]]];
         stack.inset = UIEdgeInsetsMake(-60, 0, 0, 0);
         return stack;
@@ -203,29 +184,20 @@
 /// 滑动改变导航栏状态
 /// @param scrollView <#scrollView description#>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     self.contentOffsetY = scrollView.contentOffset.y;
-
     self.navView.navV.alpha = self.contentOffsetY / 150;
     self.navView.navLabel.alpha = self.contentOffsetY / 150;
 
     if (self.contentOffsetY / 150 > 0.6) {
-        
         self.navView.isScrollUp = YES;
-        
     } else {
-        
         self.navView.isScrollUp = NO;
-
     }
-    
 }
 
-#pragma mark click
+#pragma mark - click
 - (void)navBackClick {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 @end

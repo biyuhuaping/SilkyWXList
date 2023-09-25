@@ -12,7 +12,6 @@
 @implementation dgNavView
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    
     if (self = [super initWithFrame:frame]) {
         [self bulidUI];
     }
@@ -20,7 +19,6 @@
 }
 
 - (void)bulidUI {
-    
     UIView *navV = [[UIView alloc]initWithFrame:self.bounds];
     navV.backgroundColor = RGBCOLOR(239, 239, 239);
     navV.alpha = 0;
@@ -51,39 +49,28 @@
     [self addSubview:navLabel];
     self.navLabel = navLabel;
 }
+
 - (void)setIsScrollUp:(BOOL)isScrollUp {
-    
     _isScrollUp = isScrollUp;
-    
     if (_isScrollUp) {
-        
         [self.backBtn setImage:[UIImage imageNamed:@"back"] forState:0];
         [self.camareBtn setImage:[UIImage imageNamed:@"camera"] forState:0];
-        
     } else {
-        
         [self.backBtn setImage:[UIImage imageNamed:@"back_w"] forState:0];
         [self.camareBtn setImage:[UIImage imageNamed:@"camera_w"] forState:0];
     }
-    
 }
 
 - (void)navClick:(UIButton *)btn {
-    
     if (btn.tag == 1) {
-        
         if ([self.delegate respondsToSelector:@selector(navBackClick)]) {
             [self.delegate navBackClick];
         }
-        
     } else {
-        
         if ([self.delegate respondsToSelector:@selector(navCameraClick)]) {
             [self.delegate navCameraClick];
         }
     }
-    
 }
-
 
 @end

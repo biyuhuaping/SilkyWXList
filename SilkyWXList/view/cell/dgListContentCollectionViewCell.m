@@ -10,21 +10,16 @@
 
 @implementation dgListContentCollectionViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-
+        self.backgroundColor = UIColor.whiteColor;
         [self buidUI];
-        
     }
     return self;
 }
 
-
 - (void)buidUI {
-    
     CGFloat avatorW = 50;
     CGFloat leftSpace = 16;
     
@@ -50,40 +45,31 @@
     self.lContent = lContent;
     self.avatorImage = avatorImage;
     self.userName = userName;
-    
 }
 
--(void)bindViewModel:(dgListCellModel *)vm {
+- (void)setModel:(dgListCellModel *)model{
+    [self.avatorImage sd_setImageWithURL:[NSURL URLWithString:model.lavatar]];
+    self.userName.text = model.luserName;
+    self.lContent.text = model.lcontent;
+    self.lContent.height = kStringIsEmpty(model.lcontent) ? 0:[self heightWithText:model.lcontent];
     
-    [self.avatorImage sd_setImageWithURL:[NSURL URLWithString:vm.lavatar]];
-    self.userName.text = vm.luserName;
-    self.lContent.text = vm.lcontent;
-    self.lContent.height = kStringIsEmpty(vm.lcontent) ? 0:[self heightWithText:vm.lcontent];
-    
-    NSArray *picAry = [vm.limage componentsSeparatedByString:@","];
+    NSArray *picAry = [model.limage componentsSeparatedByString:@","];
     self.npv.picAry = picAry;
     
     CGFloat MAX_CONTENTY = CGRectGetMaxY(self.lContent.frame);
     CGFloat MAX_USERNAMEY = CGRectGetMaxY(self.userName.frame);
     CGFloat MIN_LEFTSPACETOAVATOR = CGRectGetMinX(self.userName.frame);
     
-    if (!kStringIsEmpty(vm.limage) && !kStringIsEmpty(vm.lcontent)) {
-        
+    if (!kStringIsEmpty(model.limage) && !kStringIsEmpty(model.lcontent)) {
         self.npv.frame = CGRectMake(MIN_LEFTSPACETOAVATOR, MAX_CONTENTY + 10, SCREEN_WIDTH - MIN_LEFTSPACETOAVATOR - 70, [self collectionPicViewHeight:picAry.count]);
-        
-    } else if (!kStringIsEmpty(vm.limage) && kStringIsEmpty(vm.lcontent)) {
-        
+    } else if (!kStringIsEmpty(model.limage) && kStringIsEmpty(model.lcontent)) {
         self.npv.frame = CGRectMake(MIN_LEFTSPACETOAVATOR, MAX_USERNAMEY + 10, SCREEN_WIDTH - MIN_LEFTSPACETOAVATOR - 70, [self collectionPicViewHeight:picAry.count]);
-        
     } else {
-        
           self.npv.frame = CGRectZero;
-        
     }
 }
 
 - (CGFloat)collectionPicViewHeight:(NSInteger)picCount {
-    
     CGFloat verticalSpace = 5;
     if (picCount == 1) {
         return 180;
@@ -94,15 +80,13 @@
     } else  {
         return 3*PHOTO_WIDTH + 4 * verticalSpace;
     }
-    
 }
 
--(CGFloat)heightWithText:(NSString *)text {
-    
+- (CGFloat)heightWithText:(NSString *)text {
     UIFont *font = [UIFont systemFontOfSize:15];
     CGSize size = CGSizeMake(SCREEN_WIDTH - 76 - 20, CGFLOAT_MAX);
     CGRect rect = [text boundingRectWithSize:size options:NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
     return ceil(rect.size.height) + font.ascender + font.descender;
-    
 }
+
 @end

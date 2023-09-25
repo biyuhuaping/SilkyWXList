@@ -9,11 +9,11 @@
 #import "dgHeadImageCollectionViewCell.h"
 
 @implementation dgHeadImageCollectionViewCell
-- (instancetype)initWithFrame:(CGRect)frame
-{
+
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = UIColor.whiteColor;
 
         CGFloat avatorW = 80;
         CGFloat headImageVerIndentation = 60;
@@ -37,17 +37,14 @@
         self.headImage = headImage;
         self.headAvatar = headAvatar;
         self.headUserName = headUserName;
-        
     }
     return self;
 }
 
--(void)bindViewModel:(dgListCellModel *)viewModel {
-    
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:viewModel.headImage]];
-    [self.headAvatar sd_setImageWithURL:[NSURL URLWithString:viewModel.headAvatar]];
-    self.headUserName.text = viewModel.headUserName;
-    
+- (void)setModel:(dgListCellModel *)model{
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:model.headImage]];
+    [self.headAvatar sd_setImageWithURL:[NSURL URLWithString:model.headAvatar]];
+    self.headUserName.text = model.headUserName;
 }
 
 @end

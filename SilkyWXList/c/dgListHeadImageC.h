@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface dgListHeadImageC : IGListSectionController
 
-@property(nonatomic,strong)dgListModel *object;
+@property (nonatomic,strong) dgListModel *object;
 
 @end
 

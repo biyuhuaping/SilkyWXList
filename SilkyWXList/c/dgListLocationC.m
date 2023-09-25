@@ -10,29 +10,27 @@
 #import "dgListLocationCollectionViewCell.h"
 
 @implementation dgListLocationC
--(NSInteger)numberOfItems{
-    
+
+- (NSInteger)numberOfItems{
     if (kStringIsEmpty( _object.llocation)) {
         return 0;
     }
     return 1;
 }
 
--(CGSize)sizeForItemAtIndex:(NSInteger)index {
-    
+- (CGSize)sizeForItemAtIndex:(NSInteger)index {
     return CGSizeMake(SCREEN_WIDTH, 30);
-    
 }
 
--(UICollectionViewCell *)cellForItemAtIndex:(NSInteger)index{
-    
+- (UICollectionViewCell *)cellForItemAtIndex:(NSInteger)index{
     dgListLocationCollectionViewCell *cell = [self.collectionContext dequeueReusableCellWithNibName:@"dgListLocationCollectionViewCell" bundle:nil forSectionController:self atIndex:index];
-    [cell bindViewModel:[[dgListCellModel alloc]initWithModel:_object]];
+    dgListCellModel *model =  [[dgListCellModel alloc]initWithModel:_object];
+    cell.model = model;
     return cell;
-    
 }
 
--(void)didUpdateToObject:(id)object{
+- (void)didUpdateToObject:(id)object{
     _object = object;
 }
+
 @end

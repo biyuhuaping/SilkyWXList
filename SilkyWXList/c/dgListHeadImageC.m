@@ -11,27 +11,26 @@
 
 @implementation dgListHeadImageC
 
--(NSInteger)numberOfItems{
-    
+- (NSInteger)numberOfItems{
     if (_object.headImage.length > 0) {
         return 1;
     }
     return 0;
 }
 
--(CGSize)sizeForItemAtIndex:(NSInteger)index{
+- (CGSize)sizeForItemAtIndex:(NSInteger)index{
     return CGSizeMake(SCREEN_WIDTH, 400);
 }
 
--(UICollectionViewCell *)cellForItemAtIndex:(NSInteger)index{
-    
+- (UICollectionViewCell *)cellForItemAtIndex:(NSInteger)index{
     dgHeadImageCollectionViewCell *cell = [self.collectionContext dequeueReusableCellOfClass:[dgHeadImageCollectionViewCell class] forSectionController:self atIndex:index];
-    [cell bindViewModel:[[dgListCellModel alloc]initWithModel:_object]];
+    dgListCellModel *model =  [[dgListCellModel alloc]initWithModel:_object];
+    cell.model = model;
     return cell;
-    
 }
 
--(void)didUpdateToObject:(id)object{
+- (void)didUpdateToObject:(id)object{
     _object = object;
 }
+
 @end

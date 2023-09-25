@@ -28,28 +28,25 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
     dgNinePhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"dgNinePhotoCollectionViewCell" forIndexPath:indexPath];
     [cell.photoImage sd_setImageWithURL:[NSURL URLWithString:self.picAry[indexPath.item]]];
     return cell;
-    
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.picAry.count == 1) {
         return CGSizeMake((self.bounds.size.width - 10) / 2, 180);
     }
-    
     return CGSizeMake(PHOTO_WIDTH, PHOTO_WIDTH);
-    
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //图片浏览功能，成熟优秀的轮子已很多，此处不在重复造
 }
+
 - (void)setPicAry:(NSArray *)picAry {
-    
     _picAry = picAry;
     [self reloadData];
-    
 }
+
 @end

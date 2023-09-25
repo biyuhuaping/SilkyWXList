@@ -12,16 +12,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
     self.backgroundColor = [UIColor whiteColor];
-
 }
+
 - (IBAction)moreClick:(id)sender {
 
 }
--(void)bindViewModel:(dgListCellModel *)viewModel {
-    
-    self.publicTime.text = viewModel.publicTime;
-    
+
+- (void)setModel:(dgListCellModel *)model{
+    self.publicTime.text = model.publicTime;
 }
+
 @end

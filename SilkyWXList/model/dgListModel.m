@@ -11,10 +11,11 @@
 
 @implementation dgListModel
 
--(id<NSObject>)diffIdentifier{
+- (id<NSObject>)diffIdentifier{
     return self;
 }
--(BOOL)isEqualToDiffableObject:(id<IGListDiffable>)object{
+
+- (BOOL)isEqualToDiffableObject:(id<IGListDiffable>)object{
     return [self isEqual:object];
 }
 

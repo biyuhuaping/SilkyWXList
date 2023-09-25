@@ -4,17 +4,17 @@
 //
 //  Created by Runing on 2019/10/10.
 //  Copyright © 2019 Doogore. All rights reserved.
-//
+//  发布时间
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface dgListBottomCollectionViewCell : UICollectionViewCell<IGListBindable>
+@interface dgListBottomCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *publicTime;
 
-
--(void)bindViewModel:(dgListCellModel *)viewModel;
+@property (nonatomic, strong) dgListCellModel *model;
 
 @end
 

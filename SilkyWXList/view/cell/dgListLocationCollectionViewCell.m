@@ -14,9 +14,9 @@
     [super awakeFromNib];
     // Initialization code
 }
--(void)bindViewModel:(dgListCellModel *)viewModel {
-    
-    self.locationLabel.text = viewModel.llocation;
-    
+
+- (void)setModel:(dgListCellModel *)model {
+    self.locationLabel.text = model.llocation;
 }
+
 @end

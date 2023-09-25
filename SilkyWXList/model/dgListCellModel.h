@@ -21,9 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) NSString *lavatar;
 @property (nonatomic,copy) NSString *luserName;
 @property (nonatomic,copy) NSString *lcontent;
+/// 定位
 @property (nonatomic,copy) NSString *llocation;
+/// 发布时间
 @property (nonatomic,copy) NSString *publicTime;
-@property(nonatomic,assign) CGFloat cellHeight;
+@property (nonatomic,assign) CGFloat cellHeight;
 
 - (instancetype)initWithModel:(dgListModel *)model;
 

@@ -4,7 +4,7 @@
 //
 //  Created by Runing on 2019/10/11.
 //  Copyright © 2019 Doogore. All rights reserved.
-//
+//  朋友圈图片
 
 #import <UIKit/UIKit.h>
 
