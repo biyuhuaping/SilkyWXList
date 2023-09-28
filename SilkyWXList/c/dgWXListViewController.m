@@ -35,7 +35,7 @@
     
     //     准备数据
     [self prepareListData];
-
+    
     //     主列表
     self.adapter.dataSource = self;
     self.adapter.collectionView = self.collectionView;
@@ -93,14 +93,14 @@
     // 一次来十条
     for (int i=0; i < 10; i++) {
         
-    // 随机装载数据模型
+        // 随机装载数据模型
         dgListModel *lm = [[dgListModel alloc]init];
         lm.modelid = self.dicM[@"modelid"][arc4random_uniform(10)];
         lm.luserName = self.dicM[@"luserName"][arc4random_uniform(10)];
         NSMutableString * imageStr = [[NSMutableString alloc]init];
-
+        
         for (int j = 0; j < arc4random_uniform(10); j++) {
-
+            
             [imageStr appendFormat:@",%@", self.dicM[@"limage"][arc4random_uniform(10)]];
         }
         if ([imageStr hasPrefix:@","]) {
@@ -115,7 +115,7 @@
     }
     
     [self.objects addObjectsFromArray:tempA];
-   //更新数据
+    //更新数据
     [self.adapter performUpdatesAnimated:YES completion:nil];
 }
 
@@ -170,16 +170,17 @@
     emptyV.backgroundColor = [UIColor blueColor];
     return nil;
 }
-    
+
 - (NSArray<id<IGListDiffable>> *)objectsForListAdapter:(IGListAdapter *)listAdapter{
-        return self.objects;
+    return self.objects;
 }
-    
+
 - (IGListSectionController *)listAdapter:(IGListAdapter *)listAdapter sectionControllerForObject:(id)object{
-        IGListStackedSectionController *stack = [[IGListStackedSectionController alloc] initWithSectionControllers:@[[dgListHeadImageC new],[dgListContentC new],[dgListLocationC new],[dgListBottomC new]]];
-        stack.inset = UIEdgeInsetsMake(-60, 0, 0, 0);
-        return stack;
-    }
+    
+    IGListStackedSectionController *stack = [[IGListStackedSectionController alloc] initWithSectionControllers:@[[dgListHeadImageC new],[dgListContentC new],[dgListLocationC new],[dgListBottomC new]]];
+    stack.inset = UIEdgeInsetsMake(-60, 0, 0, 0);
+    return stack;
+}
 
 /// 滑动改变导航栏状态
 /// @param scrollView <#scrollView description#>
@@ -187,7 +188,7 @@
     self.contentOffsetY = scrollView.contentOffset.y;
     self.navView.navV.alpha = self.contentOffsetY / 150;
     self.navView.navLabel.alpha = self.contentOffsetY / 150;
-
+    
     if (self.contentOffsetY / 150 > 0.6) {
         self.navView.isScrollUp = YES;
     } else {
